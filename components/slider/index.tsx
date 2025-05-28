@@ -1,14 +1,15 @@
 'use client';
 import Image, { StaticImageData } from 'next/image';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { cn } from '@/utils/jsx-tools';
+
+const modules = [Pagination, Navigation, Autoplay];
 
 export interface SlideData {
   title: string;
@@ -27,9 +28,10 @@ export function Slider({
 }: SliderProps) {
   return (
     <Swiper
-      navigation={true}
-      modules={[Pagination, Navigation]}
+      modules={modules}
       className={cn(className, 'size-full')}
+      autoplay={true}
+      pagination={{ clickable: true }}
     >
       {slides.map((slide, i) => (
         <SwiperSlide className="size-full!" key={i}>

@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Lilita_One, Noto_Serif } from 'next/font/google';
-import './globals.css';
 import { cn } from '@/utils/jsx-tools';
+import type { Metadata } from 'next';
+import { Geist, Noto_Serif, Wendy_One } from 'next/font/google';
+import './globals.css';
 
 const notoSerif = Noto_Serif({
   variable: '--font-serif',
@@ -13,17 +13,11 @@ const geistSans = Geist({
   subsets: ['latin'],
 });
 
-const bold = Lilita_One({
+const bold = Wendy_One({
   variable: '--font-bold',
   weight: '400',
   subsets: ['latin'],
 });
-
-const geistMono = Geist_Mono({
-  variable: '--font-mono',
-  subsets: ['latin'],
-});
-
 export const metadata: Metadata = {
   title: 'Highend | Online food',
   description: 'Awesoem food in Awesome Resturant',
@@ -39,10 +33,9 @@ export default function RootLayout({
       <body
         className={cn(
           geistSans.variable,
-          geistMono.variable,
           bold.variable,
           notoSerif.variable,
-          `min-h-screen overflow-x-hidden antialiased`,
+          `bg-background min-h-screen overflow-x-hidden antialiased`,
         )}
       >
         {children}

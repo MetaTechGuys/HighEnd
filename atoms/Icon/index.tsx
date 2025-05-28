@@ -1,6 +1,6 @@
 import IcoMoon, { IcoMoonProps } from 'react-icomoon';
 import iconSet from './selection.json';
-import { IconNames } from './icon';
+import { IconNames } from './icon.d';
 import { cn } from '@/utils/jsx-tools';
 
 interface IconProps extends Omit<IcoMoonProps, 'icon' | 'iconSet'> {
