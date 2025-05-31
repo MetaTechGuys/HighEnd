@@ -1,7 +1,6 @@
 import { Text } from '@/atoms';
-import { cn } from '@/utils/jsx-tools';
-import Image, { StaticImageData } from 'next/image';
 import { motion } from 'motion/react';
+import Image, { StaticImageData } from 'next/image';
 
 export interface CategoryData {
   title: string;

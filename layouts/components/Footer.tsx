@@ -33,14 +33,16 @@ export default function Footer() {
           <Text as="h2" className="underline" cap>
             locations
           </Text>
-          <div className="mt-5">
-            <a href="#" className="font-title block">
-              <Text cap className="inline-flex items-center gap-2 text-sm">
-                <Icon name="call-phone" className="size-4" />
-                {contacts.phone}
-              </Text>
-            </a>
-          </div>
+          {contacts.phone ? (
+            <div className="mt-5">
+              <a href={`tel:${contacts.phone}`} className="font-title block">
+                <Text cap className="inline-flex items-center gap-2 text-sm">
+                  <Icon name="call-phone" className="size-4" />
+                  {contacts.phone}
+                </Text>
+              </a>
+            </div>
+          ) : null}
         </div>
         <div className="col-span-2 h-32">
           <Text as="h2" className="underline" cap>

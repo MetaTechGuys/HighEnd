@@ -3,11 +3,12 @@ import { Button, Text } from '@/atoms';
 import { MenuBar } from '@/components';
 import mockMenus from '@/mock-data/nav-menu';
 import logo from '@/public/logo/logo.png';
+import logoWt from '@/public/logo/logo-white-text.png';
 import { cn } from '@/utils/jsx-tools';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { BurgerMenuIcon } from './BurgerIcon';
+import { BurgerMenuIcon } from '../../atoms/BurgerIcon';
 import Link from 'next/link';
 
 interface NavbarProps {
@@ -48,8 +49,12 @@ export default function Navbar({ wide }: NavbarProps) {
                 : { opacity: 1, translateY: 0, scale: 1 }
             }
           >
-            <Image src={logo} alt="highend" className="w-full! sm:translate-x-4 md:translate-x-0" />
-            <span className="sr-only">highend</span>
+            <Image
+              src={isOpen ? logoWt : logo}
+              alt="highend"
+              className="absolute w-full! sm:translate-x-4 md:translate-x-0"
+            />
+            <span className="sr-only">Highend</span>
           </motion.div>
         </Link>
         <MenuBar items={mockMenus} className="hidden sm:flex" />
@@ -61,32 +66,43 @@ export default function Navbar({ wide }: NavbarProps) {
             Order<span className="hidden sm:inline"> Now</span>
           </Button>
         </div>
-        <motion.div
-          className="bg-accent fixed start-0 top-0 w-full overflow-hidden text-white"
-          initial={{ height: 0 }}
-          animate={isOpen ? { height: '100vh' } : { height: 0 }}
-        >
-          <div className="flex h-full flex-col gap-8 p-8 pt-48">
-            {/* <Text as="h1" uppercase className="text-center text-4xl">
-              high end
-            </Text> */}
-            {mockMenus.map((m, i) => (
-              <div key={i} className="relative text-center">
-                <Link href={m.href ?? '#'} className="w-full">
-                  <Text bold cap>
-                    {m.label}
-                  </Text>
-                </Link>
+        <AnimatePresence>
+          {isOpen ? (
+            <motion.div
+              className="bg-accent fixed start-0 top-0 w-full overflow-hidden text-white sm:hidden"
+              initial={{ height: 0 }}
+              exit={{ height: 0 }}
+              animate={{ height: '100vh' }}
+            >
+              <div className="flex h-full flex-col gap-8 p-8 pt-60">
+                <AnimatePresence propagate>
+                  {mockMenus.map((m, i) => (
+                    <motion.div
+                      key={i}
+                      className="relative text-center"
+                      initial={{ y: -300, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -300, opacity: 0 }}
+                      transition={{ ease: false }}
+                    >
+                      <Link href={m.href ?? '#'} className="w-full">
+                        <Text bold cap>
+                          {m.label}
+                        </Text>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+                <div className="mt-auto flex flex-col justify-between gap-y-4 sm:flex-row">
+                  <Button className="w-full border-0 sm:w-2/5" outline>
+                    Gift Cards
+                  </Button>
+                  <Button className="w-full sm:w-2/5">Order Now</Button>
+                </div>
               </div>
-            ))}
-            <div className="mt-auto flex justify-between">
-              <Button className="w-2/5 border-0" outline>
-                Gift Cards
-              </Button>
-              <Button className="w-2/5">Order Now</Button>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
     </nav>
   );
