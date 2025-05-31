@@ -1,14 +1,24 @@
 import { cn } from '@/utils/jsx-tools';
 import type { Metadata } from 'next';
-import { Geist, Noto_Serif, Wendy_One } from 'next/font/google';
+import { Geist, Wendy_One } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 
-const notoSerif = Noto_Serif({
-  variable: '--font-serif',
-  subsets: ['latin'],
+const iranSans = localFont({
+  src: [
+    {
+      path: '../public/fonts/Iranian-Sans.ttf',
+      weight: '400',
+    },
+    {
+      path: '../public/fonts/Iranian-Sans-Bold.ttf',
+      weight: '700',
+    },
+  ],
+  variable: '--font-iranian-sans',
 });
 
-const geistSans = Geist({
+const sans = Geist({
   variable: '--font-sans',
   subsets: ['latin'],
 });
@@ -32,9 +42,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          geistSans.variable,
+          iranSans.variable,
+          sans.variable,
           bold.variable,
-          notoSerif.variable,
           `bg-background min-h-screen overflow-x-hidden antialiased`,
         )}
       >

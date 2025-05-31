@@ -37,7 +37,6 @@ export default function Footer() {
             <div className="mt-5">
               <a href={`tel:${contacts.phone}`} className="font-title block">
                 <Text cap className="inline-flex items-center gap-2 text-sm">
-                  <Icon name="call-phone" className="size-4" />
                   {contacts.phone}
                 </Text>
               </a>

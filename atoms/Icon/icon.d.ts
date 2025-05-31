@@ -10,4 +10,5 @@ export type IconNames =
   | "call-phone"
   | "instagram"
   | "whatsapp"
+  | "arrow-back"
 
